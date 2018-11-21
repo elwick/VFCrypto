@@ -37,5 +37,5 @@ export default styled.div`
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 7em 5em 19em;
+  padding: 7em 5em 20em;
 `;
