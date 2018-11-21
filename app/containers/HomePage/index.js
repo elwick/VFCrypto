@@ -1,25 +1,61 @@
-/*
+/**
+ *
  * HomePage
  *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import injectSaga from 'utils/injectSaga';
+import saga from './saga';
+import { getCoins } from './actions';
+import Header from '../../components/Header';
+import { makeSelectLoading } from './selectors';
+import Table from '../../components/Table';
 
 /* eslint-disable react/prefer-stateless-function */
-export default class HomePage extends React.PureComponent {
+export class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.getCoins();
+  }
+
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <Header />
+        <Table />
+      </div>
     );
   }
 }
+
+HomePage.propTypes = {
+  getCoins: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCoins: evt => dispatch(getCoins(evt)),
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+// const withReducer = injectReducer({ key: 'homePage', reducer });
+const withSaga = injectSaga({ key: 'homePage', saga });
+
+export default compose(
+  // withReducer,
+  withSaga,
+  withConnect,
+)(HomePage);

@@ -6,6 +6,8 @@ import { combineReducers } from 'redux-immutable';
 import { connectRouter } from 'connected-react-router/immutable';
 
 import history from 'utils/history';
+import globalReducer from 'containers/HomePage/reducer';
+import detailPageReducer from 'containers/DetailPage/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 /**
@@ -13,6 +15,8 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
+    global: globalReducer,
+    detailPage: detailPageReducer,
     language: languageProviderReducer,
     ...injectedReducers,
   });

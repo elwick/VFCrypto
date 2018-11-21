@@ -42,7 +42,8 @@
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prettify": "prettier --write"
+    "prettify": "prettier --write",
+    "heroku-postbuild": "npm run build"
   },
   "lint-staged": {
     "*.js": [
@@ -63,6 +64,7 @@
     "chalk": "^2.4.1",
     "compression": "1.7.3",
     "connected-react-router": "4.5.0",
+    "cors": "^2.8.5",
     "cross-env": "5.2.0",
     "express": "4.16.4",
     "fontfaceobserver": "2.0.13",
@@ -75,13 +77,16 @@
     "loadable-components": "2.2.3",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
+    "moment": "^2.22.2",
     "prop-types": "15.6.2",
     "react": "16.6.0",
     "react-dom": "16.6.0",
     "react-helmet": "5.2.0",
     "react-intl": "2.7.2",
+    "react-number-format": "^4.0.4",
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
+    "react-timer-hoc": "^2.3.0",
     "redux": "4.0.1",
     "redux-immutable": "4.0.0",
     "redux-saga": "0.16.2",
